@@ -1,0 +1,257 @@
+AddRequest:
+    ##定义初始变量
+    #set($rename = $tool.append("Add", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+
+    ##使用全局变量实现默认包导入
+    $!autoImport
+    import com.Baby.platform.api.RequestDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import java.util.Date;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Add$!{tableInfo.name}Request extends RequestDTO {
+        private static final long serialVersionUID = 1L;
+    #foreach($column in $tableInfo.fullColumn)
+
+        #if(${column.comment})/**
+        * ${column.comment}
+        */#end
+        #set($abcd = "")
+        #if($!{tool.getClsNameByFullName($column.type)}!="Date")
+            #set($abcd = $!{tool.getClsNameByFullName($column.type)})
+        #end
+
+        @ApiModelProperty(value = "$column.comment", dataType = "$abcd")
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    }
+CreateRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+    ##定义初始变量
+    #set($rename = $tool.append("Create", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    ##使用全局变量实现默认包导入
+    $!autoImport
+    import com.Baby.platform.api.RequestCommandDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import java.util.Date;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Create$!{tableInfo.name}Request extends RequestCommandDTO {
+        private static final long serialVersionUID = 1L;
+    #foreach($column in $tableInfo.fullColumn)
+
+        #if(${column.comment})/**
+        * ${column.comment}
+        */#end
+        #set($abcd = "")
+        #if($!{tool.getClsNameByFullName($column.type)}!="Date")
+            #set($abcd = $!{tool.getClsNameByFullName($column.type)})
+        #end
+
+        @ApiModelProperty(value = "$column.comment", dataType = "$abcd")
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    }
+UpdateRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+    ##定义初始变量
+    #set($rename = $tool.append("Update", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    import com.Baby.platform.api.RequestCommandDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import java.util.Date;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Update$!{tableInfo.name}Request extends RequestCommandDTO {
+        private static final long serialVersionUID = 1L;
+
+    #foreach($column in $tableInfo.fullColumn)
+
+        #if(${column.comment})/**
+        * ${column.comment}
+        */#end
+        #set($abcd = "")
+        #if($!{tool.getClsNameByFullName($column.type)}!="Date")
+            #set($abcd = $!{tool.getClsNameByFullName($column.type)})
+        #end
+
+        @ApiModelProperty(value = "$column.comment", dataType = "$abcd")
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    }
+ModifyRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+    ##定义初始变量
+    #set($rename = $tool.append("Modify", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    import com.Baby.platform.api.RequestDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import java.util.Date;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Modify$!{tableInfo.name}Request extends RequestDTO {
+        private static final long serialVersionUID = 1L;
+
+    #foreach($column in $tableInfo.fullColumn)
+
+        #if(${column.comment})/**
+        * ${column.comment}
+        */#end
+        #set($abcd = "")
+        #if($!{tool.getClsNameByFullName($column.type)}!="Date")
+            #set($abcd = $!{tool.getClsNameByFullName($column.type)})
+        #end
+
+        @ApiModelProperty(value = "$column.comment", dataType = "$abcd")
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    }
+QueryRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+
+    ##定义初始变量
+    #set($rename = $tool.append("Query", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    import com.Baby.platform.api.RequestDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import java.util.Date;
+    import javax.validation.constraints.NotNull;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Query$!{tableInfo.name}Request extends RequestDTO {
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "主键id", dataType = "Long")
+        @NotNull
+        protected Long id;
+    }
+QueryListRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+    ##定义初始变量
+    #set($rename = $tool.append("QueryList", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    import com.Baby.platform.api.RequestDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import javax.validation.constraints.NotNull;
+    import lombok.EqualsAndHashCode;
+    import java.util.Date;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class QueryList$!{tableInfo.name}Request extends RequestDTO {
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "分页",required = true)
+        @NotNull
+        private PaginationDTO pagination;
+
+    #foreach($column in $tableInfo.fullColumn)
+
+        #if(${column.comment})/**
+        * ${column.comment}
+        */#end
+        #set($abcd = "")
+        #if($!{tool.getClsNameByFullName($column.type)}!="Date")
+            #set($abcd = $!{tool.getClsNameByFullName($column.type)})
+        #end
+
+        @ApiModelProperty(value = "$column.comment", dataType = "$abcd")
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    }
+
+DeleteRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+    ##定义初始变量
+    #set($rename = $tool.append("Delete", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    ##使用全局变量实现默认包导入
+    $!autoImport
+    import com.Baby.platform.api.RequestDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import javax.validation.constraints.NotNull;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Delete$!{tableInfo.name}Request extends RequestDTO {
+
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "主键ID", dataType = "Long")
+        @NotNull
+        private Long id;
+    }
+
+DisableRequest:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.request;
+    ##定义初始变量
+    #set($rename = $tool.append("Disable", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Request.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Request"))
+    import com.Baby.platform.api.RequestCommandDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    import javax.validation.constraints.NotNull;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Disable$!{tableInfo.name}Request extends RequestCommandDTO {
+
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "主键ID", dataType = "Long")
+        @NotNull
+        private Long id;
+    }

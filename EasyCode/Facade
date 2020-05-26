@@ -1,0 +1,41 @@
+package com.WananBaby.baseinfo.$!{tableInfo.name};
+##设置回调
+$!callback.setFileName($tool.append($tableInfo.name, "Facade.java"))
+$!callback.setSavePath($tool.append($tableInfo.savePath, "/$!{tableInfo.name}"))
+$!autoImport
+import com.Baby.platform.api.ResponseDTO;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Add$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Change$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Create$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Delete$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Modify$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Query$!{tableInfo.name}ListRequest;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Query$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Update$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.response.Create$!{tableInfo.name}Response;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.response.Query$!{tableInfo.name}ListResponse;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.response.Query$!{tableInfo.name}Response;
+/**
+ * @author $!author
+ * @since $!time.currTime()
+ */
+public interface $!{tableInfo.name}Facade {
+
+    static int TIMOUT = 10000;
+    static boolean LAZY = true;
+    static int RETRIES = 0;
+
+    @ApiOperation(value = "根据条件查询$!{tableInfo.name}信息列表")
+    public Query$!{tableInfo.name}ListResponse query$!{tableInfo.name}List(QueryList$!{tableInfo.name}Request request);
+    @ApiOperation(value = "根据ID查询$!{tableInfo.name}信息")
+    public Query$!{tableInfo.name}Response query$!{tableInfo.name}(Query$!{tableInfo.name}Request request);
+    @ApiOperation(value = "删除$!{tableInfo.name}信息")
+    public ResponseDTO invalid$!{tableInfo.name}(Delete$!{tableInfo.name}Request request);
+    @ApiOperation(value = "更新$!{tableInfo.name}信息")
+    public ResponseDTO update$!{tableInfo.name}(Update$!{tableInfo.name}Request request);
+    @ApiOperation(value = "更新status")
+    public ResponseDTO change$!{tableInfo.name}(Change$!{tableInfo.name}Request request);
+    @ApiOperation(value = "新增$!{tableInfo.name}信息")
+    public Create$!{tableInfo.name}Response create$!{tableInfo.name}(Create$!{tableInfo.name}Request request);
+
+}

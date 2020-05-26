@@ -1,0 +1,103 @@
+package com.WananBaby.baseinfo.facade.impl;
+##设置回调
+#set($tableName = $tool.firstUpperCase($tableInfo.name))
+$!callback.setFileName($tool.append($tableInfo.name, "FacadeImpl.java"))
+$!callback.setSavePath($tool.append($tableInfo.savePath, "/facade/impl"))
+$!autoImport
+import com.Baby.platform.api.ResponseDTO;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Add$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Change$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Create$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Delete$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Modify$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Query$!{tableInfo.name}ListRequest;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Query$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.request.Update$!{tableInfo.name}Request;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.response.Create$!{tableInfo.name}Response;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.response.Query$!{tableInfo.name}ListResponse;
+import com.WananBaby.baseinfo.$!{tableInfo.name}.response.Query$!{tableInfo.name}Response;
+import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+/**
+ * @author $!author
+ * @since $!time.currTime()
+ */
+@Service(interfaceClass = CategorysubFacade.class)
+public class $!{tableName}FacadeImpl implements $!{tableName}Facade {
+
+    @Autowired
+    private $!{tableName}Service $!{tableInfo.name}Service;
+
+    /**
+     * @methodDesc: 方法描述: 从commandDTO中获取userId
+     * @author 017889
+     * @createTime Mar 17, 2020 10:13:56 AM
+     * @version v1.0.0
+     * @param commandDTO
+     * @return
+     *
+     */
+    private Long getUserIdFromCommandDTO(CommandDTO commandDTO) {
+
+        if (commandDTO == null || commandDTO.getUser() == null) {
+            return null;
+        }
+        return Long.parseLong(Integer.toString(commandDTO.getUser()));
+    }
+
+    @Override
+    public Query$!{tableName}ListResponse query$!{tableName}List(Query$!{tableName}ListRequest request) throws ApplicationException {
+        Query$!{tableName}ListResponse response = new Query$!{tableName}ListResponse();
+        List<$!{tableName}> $!{tableName}List = $!{tableName}Service.query$!{tableName}List($!{tableName}Convertor.to$!{tableName}(request));
+        List<$!{tableName}DTO> $!{tableName}DTOList = $!{tableName}Convertor.toList($!{tableName}List);
+        response.set$!{tableName}DTOList($!{tableName}DTOList);
+        return response;
+    }
+
+    @Override
+    public Query$!{tableName}Response query$!{tableName}ById(Query$!{tableName}Request request) throws ApplicationException {
+        Query$!{tableName}Response response = new Query$!{tableName}Response();
+        $!{tableName}$!{tableName}= $!{tableName}Service.queryById(request.getId());
+        $!{tableName}DTO $!{tableName}DTO = $!{tableName}Convertor.to$!{tableName}DTO($!{tableName});
+        response.set$!{tableName}DTO($!{tableName}DTO);
+        return response;
+    }
+
+    @Override
+    public Create$!{tableName}Response create$!{tableName}(Create$!{tableName}Request request) throws ApplicationException {
+        $!{tableName}check = new $!{tableName}();
+        check.setCode(request.getCode());
+        Create$!{tableName}Response response = new Create$!{tableName}Response();
+        $!{tableName}$!{tableName}= $!{tableName}Convertor.to$!{tableName}(request);
+        Long userId = getUserIdFromCommandDTO(request.getCommandDTO());
+        $!{tableName}.setFkUserCreate(userId);
+        $!{tableName}Service.insert($!{tableName});
+        response.setId($!{tableName}.getId());
+        return response;
+    }
+
+    @Override
+    public ResponseDTO invalid$!{tableName}(Long id) throws ApplicationException {
+        $!{tableName}Service.invalidById(id);
+        return new ResponseDTO();
+    }
+
+    @Override
+    public ResponseDTO update$!{tableName}(Update$!{tableName}Request request) throws ApplicationException {
+        $!{tableName}$!{tableName}= $!{tableName}Convertor.to$!{tableName}(request);
+        $!{tableName}Service.update($!{tableName});
+        return new ResponseDTO();
+    }
+
+    @Override
+    public ResponseDTO changeStatus(ChangeStatusRequest request) throws ApplicationException {
+        $!{tableName}$!{tableName}= new $!{tableName}();
+        $!{tableName}.setId(request.getId());
+        $!{tableName}.setStatus(request.getStatus());
+        $!{tableName}Service.changeStatus($!{tableName});
+        return new ResponseDTO();
+    }
+
+
+
+}

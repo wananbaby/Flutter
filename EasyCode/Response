@@ -1,0 +1,83 @@
+CreateResponse；
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.response;
+    ##定义初始变量
+    #set($rename = $tool.append("Create", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Response.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Response"))
+    import com.Baby.platform.api.ResponseDTO;
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Create$!{tableInfo.name}Response extends ResponseDTO {
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "新增对象id",dataType = "Integer",example = "1")
+    	private Long id;
+    }
+
+QueryResponse:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.response;
+
+    ##定义初始变量
+    #set($rename = $tool.append("Query", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "Response.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Response"))
+    import com.Baby.platform.api.ResponseDTO;
+
+    import com.WananBaby.baseinfo.$!{tableInfo.name}.dto.$!{tableInfo.name}DTO;
+
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Query$!{tableInfo.name}Response extends ResponseDTO {
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "查询结果")
+        private $!{tableInfo.name}DTO $!{tool.firstLowerCase($!{tableInfo.name})}DTO;
+    }
+
+QueryListResponse:
+    package com.WananBaby.baseinfo.$!{tableInfo.name}.response;
+
+    ##定义初始变量
+    #set($rename = $tool.append("Query", $tableInfo.name))
+    ##设置回调
+    $!callback.setFileName($tool.append($rename, "ListResponse.java"))
+    $!callback.setSavePath($tool.append($tableInfo.savePath, "/$tableInfo.name/Response"))
+    import com.Baby.platform.api.ResponseDTO;
+
+    import com.WananBaby.baseinfo.$!{tableInfo.name}.dto.$!{tableInfo.name}DTO;
+    import com.Baby.platform.api.PaginationDTO;
+    import com.Baby.platform.api.ResponseDTO;
+
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+
+    import java.util.List;
+    ##使用宏定义实现类注释信息
+    @Data
+    @ApiModel
+    @EqualsAndHashCode(callSuper = true)
+    public class Query$!{tableInfo.name}ListResponse extends ResponseDTO {
+        private static final long serialVersionUID = 1L;
+
+        @ApiModelProperty(value = "查询结果列表")
+        private List<$!{tableInfo.name}DTO> $!{tool.firstLowerCase($!{tableInfo.name})}DTOS;
+
+        @ApiModelProperty(value = "分页",required = true)
+        private PaginationDTO pagination;
+    }
